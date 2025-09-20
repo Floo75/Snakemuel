@@ -162,10 +162,7 @@ export class Input {
     if (this.keys.has('arrowright') || this.keys.has('right') || this.keys.has('d')) x += 1;
     if (this.keys.has('arrowup')    || this.keys.has('up')    || this.keys.has('w') || this.keys.has('z')) y -= 1;
     if (this.keys.has('arrowdown')  || this.keys.has('down')  || this.keys.has('s')) y += 1;
-    // Debug: log when we have some axis input (temporary)
-    if (x !== 0 || y !== 0) {
-      try { console.debug('[axis]', { x, y, keys: Array.from(this.keys).slice(0, 8) }); } catch {}
-    }
+    // Debug logging removed
     return { x, y };
   }
 
@@ -184,8 +181,7 @@ export class Input {
       const aim = Math.atan2(ay, ax);
       // Instant orientation for any axis or diagonal
       dir = aim;
-      // Debug: specifically log right-only
-      if (ax === 1 && ay === 0) { try { console.debug('[aim] right-only detected'); } catch {} }
+      // Debug logging removed
     }
 
     this.targetDir = dir;

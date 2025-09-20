@@ -74,7 +74,7 @@ const updateLeaderboard = (players) => {
       leaderboardElement.appendChild(li);
     });
   } catch (error) {
-    console.error('Erreur lors de la mise à jour du classement:', error);
+    // swallow update errors to avoid mobile console overlay
   }
 };
 // Enable continuous mouse aim by default (panel toggle is hidden now)
@@ -232,11 +232,13 @@ function loop() {
       }
       // 2) Sinon, visée à la souris si active
       else if (input.mouseAimEnabled && input.mouseActive && renderer.screenToWorld) {
-        const head = me.segments[0];
-        const worldPos = renderer.screenToWorld(input.mouseX || 0, input.mouseY || 0);
-        if (Number.isFinite(worldPos.x) && Number.isFinite(worldPos.y)) {
-          const targetAngle = angleBetween(head.x, head.y, worldPos.x, worldPos.y);
-          if (Number.isFinite(targetAngle)) me.targetDir = targetAngle;
+        const head = me.segments && me.segments[0];
+        if (head && Number.isFinite(head.x) && Number.isFinite(head.y)) {
+          const worldPos = renderer.screenToWorld(input.mouseX || 0, input.mouseY || 0);
+          if (worldPos && Number.isFinite(worldPos.x) && Number.isFinite(worldPos.y)) {
+            const targetAngle = angleBetween(head.x, head.y, worldPos.x, worldPos.y);
+            if (Number.isFinite(targetAngle)) me.targetDir = targetAngle;
+          }
         }
       }
       // 3) Sinon, clavier

@@ -279,9 +279,7 @@ export class GameState {
         this.winnerId = alive[0] ? alive[0].id : null;
       }
     }
-    try {
-      console.info('[Death]', { snake: snake.id, killerId, cause });
-    } catch {}
+    // Removed console logging to avoid mobile overlays
   }
 
   maybeRespawn(snake) {
@@ -426,7 +424,7 @@ export class GameState {
           snake.score += bonus;
           snake.pendingGrowth += growth;
           this.lastCollectedPlanet = f.planet || 'unknown';
-          try { console.info('[Collect] Planet:', this.lastCollectedPlanet); } catch {}
+          // Removed console logging to avoid mobile overlays
         }
       }
       for (const fid of toDelete) this.food.delete(fid);

@@ -182,7 +182,7 @@ export class Renderer {
     for (const url of candidates) {
       const img = new Image();
       img.decoding = 'async';
-      img.onload = () => { if (!this.blackHoleTex) { this.blackHoleTex = img; console.info('[Renderer] Black hole texture loaded:', url); } };
+      img.onload = () => { if (!this.blackHoleTex) { this.blackHoleTex = img; } };
       img.onerror = () => {};
       img.src = url;
     }
@@ -383,6 +383,10 @@ export class Renderer {
   drawSnake(s) {
     const ctx = this.ctx;
     const z = this.camera.zoom;
+    // Guard: ensure we have a head before proceeding
+    if (!s || !s.segments || !s.segments.length || !Number.isFinite(s.segments[0].x) || !Number.isFinite(s.segments[0].y)) {
+      return;
+    }
 
     // body
     ctx.lineCap = 'round';
