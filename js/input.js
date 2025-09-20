@@ -30,18 +30,19 @@ export class Input {
 
     const js = this.joystick;
     if (js) {
-      js.addEventListener('pointerdown', (e) => { try { this.onJoyStart(e); } catch (_) {} });
-      js.addEventListener('pointermove', (e) => { try { this.onJoyMove(e); } catch (_) {} });
-      js.addEventListener('pointerup', () => { try { this.onJoyEnd(); } catch (_) {} });
-      js.addEventListener('pointercancel', () => { try { this.onJoyEnd(); } catch (_) {} });
+      js.addEventListener('pointerdown', (e) => { try { e.preventDefault(); this.onJoyStart(e); } catch (_) {} }, { passive: false });
+      js.addEventListener('pointermove', (e) => { try { e.preventDefault(); this.onJoyMove(e); } catch (_) {} }, { passive: false });
+      js.addEventListener('pointerup',   (e) => { try { e.preventDefault(); this.onJoyEnd(); } catch (_) {} }, { passive: false });
+      js.addEventListener('pointercancel', (e) => { try { e.preventDefault(); this.onJoyEnd(); } catch (_) {} }, { passive: false });
     }
 
     // Bouton boost
     this.boostBtn = document.getElementById('boostBtn');
     if (this.boostBtn) {
-      this.boostBtn.addEventListener('pointerdown', () => (this.boost = true));
-      this.boostBtn.addEventListener('pointerup', () => (this.boost = false));
-      this.boostBtn.addEventListener('pointerleave', () => (this.boost = false));
+      this.boostBtn.addEventListener('pointerdown', (e) => { e.preventDefault(); this.boost = true; }, { passive: false });
+      this.boostBtn.addEventListener('pointerup',   (e) => { e.preventDefault(); this.boost = false; }, { passive: false });
+      this.boostBtn.addEventListener('pointerleave',(e) => { e.preventDefault(); this.boost = false; }, { passive: false });
+      this.boostBtn.addEventListener('pointercancel',(e) => { e.preventDefault(); this.boost = false; }, { passive: false });
     }
 
     // Gestion simplifiée de la souris

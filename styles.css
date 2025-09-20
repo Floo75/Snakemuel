@@ -24,11 +24,10 @@ body {
 #app {
   display: grid;
   grid-template-columns: 1fr 320px;
-  grid-template-rows: 56px 1fr 44px;
+  grid-template-rows: 56px 1fr; /* footer removed */
   grid-template-areas:
     "topbar topbar"
-    "game side"
-    "bottom bottom";
+    "game side";
   height: 100%;
 }
 
@@ -509,7 +508,7 @@ body {
   color: #0b1022;
   background: radial-gradient(circle at 30% 30%, #9bf6ff, #22d3ee);
   box-shadow: 0 10px 24px rgba(34, 211, 238, .35);
-  touch-action: manipulation;
+  touch-action: none; /* allow multitouch with joystick without scrolling */
   display: none; /* shown on touch devices */
 }
 
@@ -517,6 +516,13 @@ body {
 @media (pointer: coarse) {
   .joystick { display: block; }
   .boost-btn { display: block; }
+  /* On touch devices, avoid selection/callout/tap highlight globally */
+  html, body, button, canvas, .joystick, .boost-btn, .in-game-leaderboard {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
 /* Modal */
