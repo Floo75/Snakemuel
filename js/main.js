@@ -17,6 +17,22 @@ const bots = new BotManager(state);
 
 // Mise à jour du classement dans le jeu
 const leaderboardElement = document.getElementById('leaderboard');
+// Force the leaderboard container (parent) to be on the RIGHT at runtime
+try {
+  const lbContainer = document.querySelector('.in-game-leaderboard');
+  const applyLBRight = () => {
+    if (lbContainer) {
+      lbContainer.style.position = 'absolute';
+      lbContainer.style.left = 'auto';
+      lbContainer.style.right = '8px';
+      lbContainer.style.top = '2px';
+      // keep width compact
+      lbContainer.style.maxWidth = '168px';
+    }
+  };
+  applyLBRight();
+  window.addEventListener('resize', applyLBRight);
+} catch {}
 
 const updateLeaderboard = (players) => {
   if (!leaderboardElement) return;

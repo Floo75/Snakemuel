@@ -92,8 +92,8 @@ body {
 .in-game-leaderboard {
   position: absolute;
   top: 2px;
-  left: calc(6px + env(safe-area-inset-left));
-  right: auto;
+  right: calc(6px + env(safe-area-inset-right)) !important;
+  left: auto !important;
   background: rgba(17, 20, 39, 0.3);
   backdrop-filter: blur(5px);
   border-radius: 4px;
@@ -531,11 +531,8 @@ body {
   /* Slightly smaller leaderboard text on touch devices */
   .leaderboard { font-size: 10px; }
   .leaderboard-header { font-size: 11px; }
-  /* Place leaderboard on the left on touch to avoid right-side clipping */
-  .in-game-leaderboard {
-    left: calc(6px + env(safe-area-inset-left));
-    right: auto;
-  }
+  /* Ensure leaderboard remains on the RIGHT on touch as requested */
+  .in-game-leaderboard { right: calc(6px + env(safe-area-inset-right)) !important; left: auto !important; }
 }
 
 /* Modal */
