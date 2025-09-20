@@ -24,7 +24,7 @@ body {
 #app {
   display: grid;
   grid-template-columns: 1fr; /* remove right reserved column globally */
-  grid-template-rows: 56px 1fr; /* footer removed */
+  grid-template-rows: auto 1fr; /* topbar auto height to include safe-area */
   grid-template-areas:
     "topbar"
     "game";
@@ -36,7 +36,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 calc(16px + env(safe-area-inset-right)) 0 calc(16px + env(safe-area-inset-left));
+  padding: calc(6px + env(safe-area-inset-top)) calc(16px + env(safe-area-inset-right)) 6px calc(16px + env(safe-area-inset-left));
   background: linear-gradient(180deg, rgba(17,20,39,.9), rgba(17,20,39,.65));
   backdrop-filter: blur(6px);
   border-bottom: 1px solid rgba(255,255,255,.06);
@@ -92,7 +92,8 @@ body {
 .in-game-leaderboard {
   position: absolute;
   top: 2px;
-  right: calc(4px + env(safe-area-inset-right));
+  left: calc(6px + env(safe-area-inset-left));
+  right: auto;
   background: rgba(17, 20, 39, 0.3);
   backdrop-filter: blur(5px);
   border-radius: 4px;
