@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="theme-color" content="#0d0f1a" />
+    <title>Snakemuel – Web Multiplayer</title>
+    <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"%3E%3Cdefs%3E%3CradialGradient id="g" cx="32" cy="32" r="30" gradientUnits="userSpaceOnUse"%3E%3Cstop offset="0" stop-color="%2360efff"/%3E%3Cstop offset="1" stop-color="%2322d3ee"/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx="32" cy="32" r="28" fill="url(%23g)"/%3E%3Cpath d="M44 28c-6 0-10-6-16-6-5 0-10 4-10 9s4 9 9 9h7c3 0 5 2 5 5" fill="none" stroke="%23ffffff" stroke-width="4" stroke-linecap="round"/%3E%3Ccircle cx="42" cy="20" r="3" fill="%23ffffff"/%3E%3C/svg%3E' />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- UI Top Bar -->
+      <header class="topbar">
+        <div class="brand">Snakemuel</div>
+        <div class="stats">
+          <div class="stat"><span>Score</span><strong id="score">0</strong></div>
+          <div class="stat"><span>Longueur</span><strong id="length">1</strong></div>
+          <div class="stat hide-on-mobile"><span>FPS</span><strong id="fps">60</strong></div>
+          <div class="stat hide-on-mobile"><span>Zone</span><strong id="zonePct">100%</strong></div>
+          <button id="pauseBtn" class="pill-btn" aria-pressed="false" aria-label="Pause">Pause</button>
+          <button id="replayTopBtn" class="pill-btn" aria-label="Rejouer">Rejouer</button>
+        </div>
+      </header>
+
+      <!-- Canvas Container -->
+      <main class="game-area">
+        <div class="game-canvas-container">
+          <canvas id="game"></canvas>
+          <div class="in-game-leaderboard">
+            <div class="leaderboard-header">Classement</div>
+            <ol id="leaderboard" class="leaderboard"></ol>
+          </div>
+        </div>
+        
+        <!-- Virtual Joystick for Mobile -->
+        <div id="joystick" class="joystick">
+          <div class="stick"></div>
+        </div>
+
+        <!-- Touch Boost Button -->
+        <button id="boostBtn" class="boost-btn" aria-label="Boost">Boost</button>
+
+        <!-- Overlay messages (Pause / Game Over) -->
+        <div id="overlay" class="overlay" aria-live="polite" aria-atomic="true" hidden>
+          <div class="overlay-text">
+            <div id="overlayText"></div>
+            <div class="overlay-actions" id="overlayActions" hidden>
+              <button id="replayBtn" class="pill-btn">Rejouer</button>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Le classement sera affiché directement dans l'interface de jeu -->
+
+      <!-- Modal de personnalisation (pré-jeu / pause) -->
+      <div id="customModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="customTitle">
+        <div class="modal-card">
+          <h2 id="customTitle" class="brand-title">Snakemuel</h2>
+          <div class="customization">
+            <label for="nameInputModal">Pseudo</label>
+            <input id="nameInputModal" type="text" maxlength="16" placeholder="Joueur" />
+
+            <label>Couleur / Skin</label>
+            <div id="skinPickerModal" class="skin-picker" role="listbox" aria-label="Skin du serpent (modal)"></div>
+
+            <label style="margin-top:6px">Mode de jeu</label>
+            <div class="row" style="display:flex; gap:12px">
+              <label><input type="radio" name="mode" id="modeBR" checked /> Battle Royale</label>
+              <label><input type="radio" name="mode" id="modeDuel" /> Duel rapide</label>
+            </div>
+          </div>
+          <div class="row center" style="margin-top:12px; display:flex; gap:10px; justify-content:center">
+            <button id="modeBtnBR" class="pill-btn" type="button">Duel rapide BR</button>
+            <button id="modeBtnDuelRespawn" class="pill-btn" type="button">Duel avec respawn</button>
+            <button id="modalStartBtn" class="pill-btn" type="button">Jouer</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Help -->
+      <footer class="bottombar">
+        <div>Mode: <span id="netMode">Hors-ligne (simulation locale)</span></div>
+        <div>Battle Royale: pas de respawn. Touche P = Pause/Reprendre.</div>
+      </footer>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
