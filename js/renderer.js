@@ -44,8 +44,8 @@ export class Renderer {
     this.foodMoonsMap = new WeakMap(); // food -> array of moons
     this._loadPlanetTextures();
     this._loadBlackHoleTexture();
-    // Minimap plus grande par défaut (peut être surchargée par le slider UI)
-    this.minimapSize = 200;
+    // Minimap: reduce size (requested: 2x smaller)
+    this.minimapSize = 100;
     this.resize();
     window.addEventListener('resize', () => this.resize());
   }
