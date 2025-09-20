@@ -36,7 +36,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: calc(6px + env(safe-area-inset-top)) calc(16px + env(safe-area-inset-right)) 6px calc(16px + env(safe-area-inset-left));
+  padding: calc(2px + env(safe-area-inset-top)) calc(16px + env(safe-area-inset-right)) 4px calc(16px + env(safe-area-inset-left));
   background: linear-gradient(180deg, rgba(17,20,39,.9), rgba(17,20,39,.65));
   backdrop-filter: blur(6px);
   border-bottom: 1px solid rgba(255,255,255,.06);
@@ -91,7 +91,7 @@ body {
 /* Classement intégré dans le jeu */
 .in-game-leaderboard {
   position: absolute;
-  top: 2px;
+  top: 0px;
   right: calc(6px + env(safe-area-inset-right)) !important;
   left: auto !important;
   background: rgba(17, 20, 39, 0.3);
